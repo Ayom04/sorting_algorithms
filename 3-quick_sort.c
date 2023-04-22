@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * _swap_l - Swap two integers in an array.
+ * swap_l - Swap two integers in an array.
  * @a: The first integer to swap.
  * @b: The second integer to swap.
  */
@@ -22,6 +22,7 @@ void swap_l(int *a, int *b)
  * @size: The size of the array.
  * @left: The starting index of the subset to order.
  * @right: The ending index of the subset to order.
+ *
  * Return: The final partition index.
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
@@ -61,13 +62,13 @@ int lomuto_partition(int *array, size_t size, int left, int right)
  */
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int _pivot_posi;
+	int pivot_posi;
 
 	if (right - left > 0)
 	{
-		_pivot_posi = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, _pivot_posi - 1);
-		lomuto_sort(array, size, _pivot_posi + 1, right);
+		pivot_posi = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, pivot_posi - 1);
+		lomuto_sort(array, size, pivot_posi + 1, right);
 	}
 }
 
