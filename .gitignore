@@ -1,1 +1,4 @@
 .vscode
+.gitignore
+2-O
+2-selection_sort.c
