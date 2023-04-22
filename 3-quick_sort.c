@@ -13,6 +13,7 @@ void _swap_l(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
+
 /**
  * lomuto_partition - Order a subset of an array of integers
  * according to the lomuto partition scheme (last element as
@@ -25,30 +26,31 @@ void _swap_l(int *a, int *b)
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, top, buttom;
+	int *pivot, j, i;
 
 	pivot = array + right;
-	for (buttom = top = left; top < right; top++)
+	for (j = i = left; i < right; i++)
 	{
-		if (array[top] < *pivot)
+		if (array[i] < *pivot)
 		{
-			if (buttom < top)
+			if (j < i)
 			{
-				_swap_l(array + top, array + buttom);
+				_swap_l(array + i, array + j);
 				print_array(array, size);
 			}
-			buttom++;
+			j++;
 		}
 	}
 
-	if (array[buttom] > *pivot)
+	if (array[j] > *pivot)
 	{
-		_swap_l(array + buttom, pivot);
+		_swap_l(array + j, pivot);
 		print_array(array, size);
 	}
 
-	return (buttom);
+	return (j);
 }
+
 /**
  * lomuto_sort - Implement the quicksort algorithm through
  * recursion.
@@ -59,18 +61,19 @@ int lomuto_partition(int *array, size_t size, int left, int right)
  */
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int _pivot_position;
+	int _pivot_posi;
 
 	if (right - left > 0)
 	{
-		_pivot_position = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, _pivot_position - 1);
-		lomuto_sort(array, size, _pivot_position + 1, right);
+		_pivot_posi = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, _pivot_posi - 1);
+		lomuto_sort(array, size, _pivot_posi + 1, right);
 	}
 }
+
 /**
  * quick_sort - Sort an array of integers in ascending
- * order using the quicksort algorithm.
+ *order using the quicksort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
  */
