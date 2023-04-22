@@ -43,7 +43,6 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
-void quicksort(int *array, size_t n,  size_t lb, size_t ub);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
 void counting_sort(int *array, size_t size);
@@ -53,8 +52,8 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 size_t partition(int *array, size_t n,  size_t lb, size_t ub);
-void _swap_l(int *a, int *b);
 int lomuto_partition(int *array, size_t size, int left, int right);
-void lomuto_sort(int *array, size_t size, int left, int right)
+void lomuto_sort(int *array, size_t size, int left, int right);
+void _swap_l(int *a, int *b); 
 
 #endif /* SORTH_H */
