@@ -34,7 +34,7 @@ int lomuto_partition(int *array, size_t size, int left, int right)
 		{
 			if (buttom < top)
 			{
-				swap_l(array + top, array + buttom);
+				_swap_l(array + top, array + buttom);
 				print_array(array, size);
 			}
 			buttom++;
@@ -43,7 +43,7 @@ int lomuto_partition(int *array, size_t size, int left, int right)
 
 	if (array[buttom] > *pivot)
 	{
-		swap_l(array + buttom, pivot);
+		_swap_l(array + buttom, pivot);
 		print_array(array, size);
 	}
 
