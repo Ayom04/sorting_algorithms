@@ -54,7 +54,7 @@ void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 size_t partition(int *array, size_t n,  size_t lb, size_t ub);
-void _swap_l(int *a, int *b);
+void swap_l(int *a, int *b);
 int lomuto_partition(int *array, size_t size, int left, int right);
 void lomuto_sort(int *array, size_t size, int left, int right)
 

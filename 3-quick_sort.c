@@ -5,7 +5,7 @@
  * @a: The first integer to swap.
  * @b: The second integer to swap.
  */
-void _swap_l(int *a, int *b)
+void swap_l(int *a, int *b)
 {
 	int temp;
 
@@ -35,7 +35,7 @@ int lomuto_partition(int *array, size_t size, int left, int right)
 		{
 			if (j < i)
 			{
-				_swap_l(array + i, array + j);
+				swap_l(array + i, array + j);
 				print_array(array, size);
 			}
 			j++;
@@ -44,7 +44,7 @@ int lomuto_partition(int *array, size_t size, int left, int right)
 
 	if (array[j] > *pivot)
 	{
-		_swap_l(array + j, pivot);
+		swap_l(array + j, pivot);
 		print_array(array, size);
 	}
 
