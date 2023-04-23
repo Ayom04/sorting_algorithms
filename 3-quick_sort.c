@@ -2,7 +2,7 @@
 
 
 /**
- * swap_l - Swap two integers in an array.
+ * _swap_l - Swap two integers in an array.
  * @a: The first integer to swap.
  * @b: The second integer to swap.
  */
@@ -27,29 +27,29 @@ void _swap_l(int *a, int *b)
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, i, j;
+	int *pivot, top, buttom;
 
 	pivot = array + right;
-	for (i = j = left; j < right; j++)
+	for (top = buttom = left; buttom < right; buttom++)
 	{
-		if (array[j] < *pivot)
+		if (array[buttom] < *pivot)
 		{
-			if (i < j)
+			if (top < buttom)
 			{
-				_swap_l(array + j, array + i);
+				_swap_l(array + buttom, array + top);
 				print_array(array, size);
 			}
-			i++;
+			top++;
 		}
 	}
 
-	if (array[i] > *pivot)
+	if (array[top] > *pivot)
 	{
-		_swap_l(array + i, pivot);
+		_swap_l(array + top, pivot);
 		print_array(array, size);
 	}
 
-	return (i);
+	return (top);
 }
 
 /**
