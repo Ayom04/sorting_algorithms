@@ -1,54 +1,70 @@
 #include "sort.h"
 
 /**
-  * insertion_sort_list - sorts a DLL of int in ascending order
-  * using the Insertion sort algorithm
-  * @list: DLL to sort
+  * merge - merge two subarray of array
+  * @array: array
+  * @low: left index
+  * @mid: last index in first subarray after split
+  * @high: last index of array
   */
-void insertion_sort_list(listint_t **list)
+void merge(int *array, int low, int mid, int high)
 {
-	listint_t *current, *next, *prev, *temp;
+	int i = low;
+	int j = mid + 1;
+	int k = low;
+	int *array_temp;
 
-	if (list == NULL)
+	array_temp = (int *)malloc(sizeof(array));
+	if (array_temp == NULL)
 		return;
-
-	current = next = *list;
-
-	while (current != NULL)
+	printf("merging...\n");
+	printf("[left]: ");
+	print_array(array + low, mid - low);
+	printf("[right]: ");
+	print_array(array + mid, high - mid);
+	while (i <= mid && j <= high)
 	{
-		while (current->prev != NULL)
-		{
-			prev = current->prev;
-			temp = prev;
-			if (prev->n > current->n)
-				swap_node(prev, current, list);
-			current = temp;
-		}
-		current = next->next;
-		next = current;
+		if (array[i] < array[j])
+			array_temp[k++] = array[i++];
+		else
+			array_temp[k++] = array[j++];
+	}
+	while (i <= mid)
+		array_temp[k++] = array[i++];
+	while (j <= high)
+		array_temp[k++] = array[j++];
+	for (i = low; i < k; i++)
+		array[i] = array_temp[i];
+	printf("[Done]: ");
+	print_array(array, k);
+	free(array_temp);
+}
+/**
+ * mergeSort - recursion
+ * @arr: array
+ * @low: first index
+ * @high: last index
+ */
+void mergeSort(int arr[], int low, int high)
+{
+	int mid;
+
+	if (low < high)
+	{
+		mid = (low + high) / 2;
+		mergeSort(arr, low, mid);
+		mergeSort(arr, mid + 1, high);
+		merge(arr, low, mid, high);
 	}
 }
-
 /**
-  * swap_node - swap 2 nodes in DLL
-  * @prev: before node
-  * @current: after node
-  * @list: head of DLL
-**/
-void swap_node(listint_t *prev, listint_t *current, listint_t **list)
+  * merge_sort - merge sort
+  * @array: array
+  * @size: size of array
+  */
+void merge_sort(int *array, size_t size)
 {
-	listint_t *temp;
-
-	temp = prev->prev;
-	if (temp)
-		temp->next = current;
-	current->prev = temp;
-	prev->prev = current;
-	prev->next = current->next;
-	current->next = prev;
-	if (prev->next != NULL)
-		prev->next->prev = prev;
-	if (current->prev == NULL)
-		*list = current;
-	print_list(*list);
+	if (array == NULL || size < 2)
+		return;
+	mergeSort(array, 0, size - 1);
 }
