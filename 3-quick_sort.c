@@ -1,16 +1,16 @@
 #include "sort.h"
 
-void _swap_l(int *a, int *b);
+void swap_l(int *a, int *b);
 int lomuto_partition(int *array, size_t size, int left, int right);
 void lomuto_sort(int *array, size_t size, int left, int right);
 void quick_sort(int *array, size_t size);
 
 /**
- * _swap_l - Swap two integers in an array.
+ * swap_l - Swap two integers in an array.
  * @a: The first integer to swap.
  * @b: The second integer to swap.
  */
-void _swap_l(int *a, int *b)
+void swap_l(int *a, int *b)
 {
 	int tmp;
 
@@ -31,29 +31,29 @@ void _swap_l(int *a, int *b)
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, top, buttom;
+	int *pivot, i, j;
 
 	pivot = array + right;
-	for (top = buttom = left; buttom < right; buttom++)
+	for (i = j = left; j < right; j++)
 	{
-		if (array[buttom] < *pivot)
+		if (array[j] < *pivot)
 		{
-			if (top < buttom)
+			if (i < j)
 			{
-				swap_l(array + buttom, array + top);
+				swap_l(array + j, array + i);
 				print_array(array, size);
 			}
-			top++;
+			i++;
 		}
 	}
 
-	if (array[top] > *pivot)
+	if (array[i] > *pivot)
 	{
-		_swap_l(array + top, pivot);
+		swap_l(array + i, pivot);
 		print_array(array, size);
 	}
 
-	return (top);
+	return (i);
 }
 
 /**
@@ -67,13 +67,13 @@ int lomuto_partition(int *array, size_t size, int left, int right)
  */
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int _path;
+	int pivot_posi;
 
 	if (right - left > 0)
 	{
-		_path = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, _path - 1);
-		lomuto_sort(array, size, _path + 1, right);
+		pivot_posi = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, pivot_posi - 1);
+		lomuto_sort(array, size, pivot_posi + 1, right);
 	}
 }
 
