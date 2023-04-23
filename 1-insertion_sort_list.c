@@ -1,38 +1,51 @@
 #include "sort.h"
 
 /**
- *bubble_sort - Sorts an array of integers in ascending
- *order using the Bubble sort algorithm
- *@array: Array to be sorted
- *@size: size of array
- *Return: Nothing
+ * swap - Swap nodes
+ * @h: Head pointer to the linked list
+ * @sort_l: pointer to the sorted part of linked list
+ * @temp: Pointer to node whise value is being compared
+ * Return: Nothing
  */
-void bubble_sort(int *array, size_t size)
+void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
 {
-	size_t n = size;
-	int _flag;
-	size_t i, j;
-	int temp;
+	if (temp->next)
+		temp->next->prev = temp->prev;
+	if  (temp->prev)
+		temp->prev->next = temp->next;
 
-	if (!array || size < 2)
+	if ((*sort_l)->prev)
+		(*sort_l)->prev->next = temp;
+	else
+		*h = temp;
+	temp->prev = (*sort_l)->prev;
+	(*sort_l)->prev = temp;
+	temp->next = *sort_l;
+	*sort_l = temp->prev;
+}
+/**
+ * insertion_sort_list - Sorts a doubly linked list of integers
+ * using the insertion sort algorithm.
+ * @list: Array to be sorted.
+ * Return: Nothing
+ */
+void insertion_sort_list(listint_t **list)
+{
+	listint_t *temp, *sort_l, *h = *list;
+
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
+	while (h->prev)
+		h = h->prev;
 
-	for (i = 0; i < n - 1; i++)
+	for (h = h->next; h != NULL; h = h->next)
 	{
-		_flag = 0;
-		for (j = 0; j < n - (i + 1); j++)
+		temp = h;
+		sort_l = h->prev;
+		while (sort_l != NULL && sort_l->n > temp->n)
 		{
-			if (array[j] > array[j + 1])
-			{
-				temp = array[j + 1];
-				array[j + 1] = array[j];
-				array[j] = temp;
-				print_array(array, n);
-				_flag = 1;
-			}
+			swap(list, &sort_l, temp);
+			print_list(*list);
 		}
-		if (_flag == 0)
-			break;
-
 	}
 }
