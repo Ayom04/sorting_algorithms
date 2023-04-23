@@ -1,4 +1,4 @@
-#include "sort.h"
+include "sort.h"
 
 /**
  * swap - Swap nodes
@@ -10,28 +10,25 @@
 
 void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
 {
-	if (temp->next)
-		temp->next->prev = temp->prev;
-	if  (temp->prev)
-		temp->prev->next = temp->next;
-
-	if ((*sort_l)->prev)
-		(*sort_l)->prev->next = temp;
+	(*n1)->next = n2->next;
+	if (n2->next != NULL)
+		n2->next->prev = *n1;
+	n2->prev = (*n1)->prev;
+	n2->next = *n1;
+	if ((*n1)->prev != NULL)
+		(*n1)->prev->next = n2;
 	else
-		*h = temp;
-	temp->prev = (*sort_l)->prev;
-	(*sort_l)->prev = temp;
-	temp->next = *sort_l;
-	*sort_l = temp->prev;
+		*h = n2;
+	(*n1)->prev = n2;
+	*n1 = n2->prev;
 }
-
-
 /**
  * insertion_sort_list - Sorts a doubly linked list of integers
  * using the insertion sort algorithm.
  * @list: Array to be sorted.
  * Return: Nothing
  */
+
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *temp, *sort_l, *h = *list;
@@ -44,8 +41,7 @@ void insertion_sort_list(listint_t **list)
 	for (h = h->next; h != NULL; h = h->next)
 	{
 		temp = h;
-		sort_l = h->prev
-
+		sort_l = h->prev;
 		while (sort_l != NULL && sort_l->n > temp->n)
 		{
 			swap(list, &sort_l, temp);
