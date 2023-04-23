@@ -7,6 +7,7 @@
  * @temp: Pointer to node whise value is being compared
  * Return: Nothing
  */
+
 void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
 {
 	if (temp->next)
@@ -23,6 +24,8 @@ void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
 	temp->next = *sort_l;
 	*sort_l = temp->prev;
 }
+
+
 /**
  * insertion_sort_list - Sorts a doubly linked list of integers
  * using the insertion sort algorithm.
@@ -41,7 +44,8 @@ void insertion_sort_list(listint_t **list)
 	for (h = h->next; h != NULL; h = h->next)
 	{
 		temp = h;
-		sort_l = h->prev;
+		sort_l = h->prev
+
 		while (sort_l != NULL && sort_l->n > temp->n)
 		{
 			swap(list, &sort_l, temp);
