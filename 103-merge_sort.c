@@ -1,17 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 
 /**
   * merge - merge two subarray of array
   * @array: array
-  * @below: left index
-  * @_middle: last index in first subarray after split
-  * @above: last index of array
+  * @low: left index
+  * @mid: last index in first subarray after split
+  * @high: last index of array
   */
-void merge(int *array, int below, int _middle, int above)
+void merge(int *array, int low, int mid, int high)
 {
-	int i = below;
-	int j = _middle + 1;
-	int k = below;
+	int i = low;
+	int j = mid + 1;
+	int k = low;
 	int *array_temp;
 
 	array_temp = (int *)malloc(sizeof(array));
@@ -19,21 +21,21 @@ void merge(int *array, int below, int _middle, int above)
 		return;
 	printf("merging...\n");
 	printf("[left]: ");
-	print_array(array + below, _middle - below);
+	print_array(array + low, mid - low);
 	printf("[right]: ");
-	print_array(array + _middle, above - _middle);
-	while (i <= _middle && j <= above)
+	print_array(array + mid, high - mid);
+	while (i <= mid && j <= high)
 	{
 		if (array[i] < array[j])
 			array_temp[k++] = array[i++];
 		else
 			array_temp[k++] = array[j++];
 	}
-	while (i <= _middle)
+	while (i <= mid)
 		array_temp[k++] = array[i++];
-	while (j <= above)
+	while (j <= high)
 		array_temp[k++] = array[j++];
-	for (i = below; i < k; i++)
+	for (i = low; i < k; i++)
 		array[i] = array_temp[i];
 	printf("[Done]: ");
 	print_array(array, k);
@@ -41,20 +43,20 @@ void merge(int *array, int below, int _middle, int above)
 }
 /**
  * mergeSort - recursion
- * @_arr: array
- * @below: first index
- * @above: last index
+ * @arr: array
+ * @low: first index
+ * @high: last index
  */
-void mergeSort(int _arr[], int below, int above)
+void mergeSort(int arr[], int low, int high)
 {
-	int _middle;
+	int mid;
 
-	if (below < above)
+	if (low < high)
 	{
-		_middle = (below + above) / 2;
-		mergeSort(_arr, below, _middle);
-		mergeSort(_arr, _middle + 1, above);
-		merge(_arr, below, _middle, above);
+		mid = (low + high) / 2;
+		mergeSort(arr, low, mid);
+		mergeSort(arr, mid + 1, high);
+		merge(arr, low, mid, high);
 	}
 }
 /**
