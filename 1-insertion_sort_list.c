@@ -1,14 +1,12 @@
-include "sort.h"
+#include "sort.h"
 
 /**
- * swap - Swap nodes
- * @h: Head pointer to the linked list
- * @sort_l: pointer to the sorted part of linked list
- * @temp: Pointer to node whise value is being compared
- * Return: Nothing
+ * swap_nodes - Swap two nodes in a listint_t doubly-linked list.
+ * @h: A pointer to the head of the doubly-linked list.
+ * @n1: A pointer to the first node to swap.
+ * @n2: The second node to swap.
  */
-
-void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
+void swap_nodes(listint_t **h, listint_t **n1, listint_t *n2)
 {
 	(*n1)->next = n2->next;
 	if (n2->next != NULL)
@@ -23,12 +21,11 @@ void swap(listint_t **h, listint_t **sort_l, listint_t *temp)
 	*n1 = n2->prev;
 }
 /**
- * insertion_sort_list - Sorts a doubly linked list of integers
- * using the insertion sort algorithm.
- * @list: Array to be sorted.
- * Return: Nothing
+ *insertion_sort_list - Sorts a doubly linked list of integers
+ *using the insertion sort algorithm.
+ *@list: Array to be sorted.
+ *Return: Nothing
  */
-
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *temp, *sort_l, *h = *list;
