@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 /**
   * heap_sort - sorts an array of int in ascending order
